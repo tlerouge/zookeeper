@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Banque</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+
+    <h2>Banque</h2>
+
+    <form action="#" method="post" th:object="${userModel}" th:action="@{/bank}">
+        <fieldset>
+            <div id="credentials">
+                <label for="id">Identifiant: </label>
+                <input type="text" th:field="*{id}" size="30"/>
+                <br/>
+                <label for="pwd">Mot de passe: </label>
+                <input type="text" th:field="*{pwd}" size="30"/>
+                <br/>
+            </div>
+            <div id="log">
+                <button name="submit" type="submit">Connexion</button>
+            </div>
+        </fieldset>
+    </form>
+</html>
