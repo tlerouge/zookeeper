@@ -2,10 +2,6 @@ package controller;
 
 import com.google.gson.Gson;
 import model.UserModel;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.http.client.HttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,7 +48,6 @@ public class MainController {
             byte[] jsonBytes = jsonString.getBytes();
             os.write(jsonBytes);
             os.flush();
-
             if (conn.getResponseCode() == HttpURLConnection.HTTP_BAD_GATEWAY) {
                 logger.warn("La connexion a echoue (erreur 502)");
                 throw new RuntimeException("Connection failed : HTTP error code : "
@@ -69,6 +63,7 @@ public class MainController {
                 while ((output = br.readLine()) != null) {
                     logger.info(output);
                 }
+                mav.addObject("message","ok");
 
             }
             conn.disconnect();

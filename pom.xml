@@ -12,6 +12,7 @@
     <modules>
         <module>bank-client-rest</module>
         <module>bank-server-rest</module>
+        <module>model</module>
     </modules>
 
     <properties>
