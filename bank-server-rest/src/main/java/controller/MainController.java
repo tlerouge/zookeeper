@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.NodeModel;
 import model.UserModel;
 import org.apache.http.entity.StringEntity;
 import org.apache.log4j.Logger;
@@ -30,9 +31,10 @@ public class MainController {
             boolean logged = zkUtils.login("/client-" + userModel.getId(),userModel.getPwd().getBytes());
             if (logged) {
                 logger.info("connecté");
+                return new String(zkUtils.getData("/client-" + userModel.getId()));
             } else {
                 logger.info("non connecté");
-
+                return "KO";
             }
         } catch (Exception e) {
         }

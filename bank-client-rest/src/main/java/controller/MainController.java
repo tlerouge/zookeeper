@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.NodeModel;
 import model.UserModel;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -62,8 +63,17 @@ public class MainController {
                 logger.info("Output from Server .... \n");
                 while ((output = br.readLine()) != null) {
                     logger.info(output);
+                    if(!output.equals("KO")) {
+                        NodeModel nodeModel = gson.fromJson(output, NodeModel.class);
+                        mav.addObject("nodeModel",nodeModel);
+                    } else {
+                        mav.addObject("nodeModel", null);
+                    }
                 }
-                mav.addObject("message","ok");
+
+
+
+
 
             }
             conn.disconnect();

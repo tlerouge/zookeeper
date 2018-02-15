@@ -36,6 +36,8 @@ public class ZkUtils {
     }
 
     public boolean login(String path, byte[] data) throws Exception {
+
+
         /*
         logger.info("try to get into " + path + " with password " + new String(data) + " whereas password is " + new String(getData(path)));
 
@@ -69,14 +71,17 @@ public class ZkUtils {
         logger.info(g.fromJson(new String(getData("/client-tom")),NodeModel.class).toString());
         */
 
-        /*if (new String(getData(path)).equals(new String(data))) {
+        Gson g = new Gson();
+        NodeModel nodeModel = g.fromJson(new String(getData(path)),NodeModel.class);
+        String pwd = nodeModel.getUser().getPwd();
+
+        if (pwd.equals(new String(data))) {
+            logger.info(nodeModel.getUser().getId() + " logged");
             return true;
         } else {
+            logger.info(nodeModel.getUser().getId() + " not logged");
             return false;
-        }*/
-        Gson g = new Gson();
-        logger.info(g.fromJson(new String(getData("/client-tom")),NodeModel.class).toString());
-        return true;
+        }
     }
 
     public String createNode(String path, byte[] data) throws Exception
